@@ -47,6 +47,13 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->getMock();
     }
 
+    public function getWaveformMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Waveform')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
     public function getFFMpegDriverMock()
     {
         return $this->getMockBuilder('FFMpeg\Driver\FFMpegDriver')
@@ -140,5 +147,25 @@ class TestCase extends \PHPUnit_Framework_TestCase
             ->will($this->returnValue($filename));
 
         return $video;
+    }
+
+    public function getConcatMock()
+    {
+        return $this->getMockBuilder('FFMpeg\Media\Concat')
+            ->disableOriginalConstructor()
+            ->getMock();
+    }
+
+    public function getFormatInterfaceMock()
+    {
+        $FormatInterface = $this->getMockBuilder('FFMpeg\Format\FormatInterface')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $FormatInterface->expects($this->any())
+            ->method('getExtraParams')
+            ->will($this->returnValue(array()));
+
+        return $FormatInterface;
     }
 }
